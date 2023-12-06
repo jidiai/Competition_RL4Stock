@@ -1,0 +1,13 @@
+{
+  "kafang_stock": {
+    "class_literal": "KaFangStock",
+    "act_box": {"discrete_n": 2},
+    "agent_nums": [1],
+    "game_name": "kafang_stock",
+    "is_act_continuous": false,
+    "is_obs_continuous": true,
+    "max_step": 200,
+    "n_player": 1,
+    "obs_type": ["vector"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "code_nums_mean": 100.0,
+    "daily_pnl_mean_sharped": 2997986.560136212,
+    "daily_return_mean": 0.0018103783575701762,
+    "daily_return_mean_sharped": 0.0018103783575701762,
+    "day_handling_fee_mean": 211357.79861384994,
+    "day_pnl_mean": 2997986.560136212,
+    "day_total_orders_volume_mean": 83882.5,
+    "day_traded_pnl_mean": 2997986.560136212,
+    "sharpe": 12.986433204845254,
+    "win_rate": 0.75
+}
