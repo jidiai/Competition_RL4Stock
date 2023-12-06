@@ -88,13 +88,13 @@ class KaFangStock(Game):
         self.total_game = len(self.env_core_list)
 
         obs, done, info = self.env_core_list[self.current_game].reset()
-        self.all_observes = [obs]
+        self.all_observes = [{"observation": obs, "new_game": True}]
         return self.all_observes
 
     def reset_game(self):
         self.current_game += 1
         obs, done, info = self.env_core_list[self.current_game].reset()
-        self.all_observes = [obs]
+        self.all_observes = [{"observation": obs, "new_game": True}]
         return self.all_observes
 
 
@@ -158,14 +158,14 @@ class KaFangStock(Game):
         # volume = min(1, self.all_observes[0]['bv0'])#random.randrange(0,2)
         # price = self.all_observes[0]['bp0']-0.1
 
-        info_before = {}
+        info_before = None
 
         try:
             obs,done,info = self.env_core_list[self.current_game].step(decoded_order)
         except ValueError as v:
-            print(f'Env terminate early due to error {v}')
-            obs = 0
+            print(f'Current game terminate early due to error {v}')
             done = True
+            obs = {}
             info = None
 
         # self.all_observes = [obs]
@@ -176,9 +176,9 @@ class KaFangStock(Game):
             self.all_observes = obs
         elif done and (self.current_game==self.total_game-1):
             self.done = True
-            self.all_observes = [obs]
+            self.all_observes = [{"observation": obs, "new_game": False}]
         else:
-            self.all_observes = [obs]
+            self.all_observes = [{"observation": obs, "new_game": False}]
 
 
         if self.done:

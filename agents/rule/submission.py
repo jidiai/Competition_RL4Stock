@@ -10,9 +10,9 @@ https://github.com/jidiai/ai_lib/blob/master/examples/demo
 
 
 def my_controller(observation, action_space, is_act_continuous=False):
-
+    obs = observation['observation']
     side = [0,1,0]
-    volumn = min(1, observation['av0'])
-    price = observation['ap0']+0.1
+    volumn = min(1, obs['av0'])
+    price = obs['ap0']+0.1
     return [side, [volumn], [price]]
 
