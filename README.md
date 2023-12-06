@@ -4,6 +4,7 @@
 
 This repo provide the source code for the [KaFang Technology - Stock Trading Reinforcement Learning Challenge](http://www.jidiai.cn/compete_detail?compete=45)
 
+"RL4Stock (Stock Trading Reinforcement Learning Challenge) is hosted by KAFANG Technology Co., Ltd. It is a reinforcement learning competition tailored for real stock trading scenarios. The competition aims to provide a platform for researchers interested in reinforcement learning to develop effective stock trading strategies. Participants are encouraged to explore various innovative ideas and approaches in this competition, and we have prepared substantial rewards for participants. We welcome everyone to join.
 
 
 ## Multi-Agent Game Evaluation Platform --- Jidi (及第)
@@ -13,7 +14,11 @@ A tutorial on Jidi: [Tutorial](https://github.com/jidiai/ai_lib/blob/master/asse
 
 
 ## Environment
-The competition environment is a single-player stock prediction game.
+The competition environment is a single-player stock prediction game. In this code repository, we have provided some foundational materials necessary for participating in the competition.
+
+To develop effective trading strategies, you can build upon these foundations. Firstly, we offer a real trading environment encapsulated in a `.so` file, similar to the gym format, which can be found in the `./envs/stock_raw/envs` directory.
+
+You can refer to the usage in `./envs/stock_raw/test.py` to incorporate it into your work. Additionally, we provide a simple trading strategy located in the `.envs/stock_raw/backtest/policies.py` file. You can evaluate its performance by running `python ./envs/stock_raw/test.py`.
 
 <img src='imgs/env_img.jpg' width=300>
 
