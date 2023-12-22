@@ -78,7 +78,7 @@ class KaFangStock(Game):
         return [self.get_single_action_space(0)]
 
     def get_single_action_space(self, player_idx):
-        return [Discrete(3), Box(low=0, high=100, shape=(1,)), Box(low=2000, high=10000, shape=(1,))]
+        return [Discrete(3), Box(low=0, high=300, shape=(1,)), Box(low=0, high=100000, shape=(1,))]
 
     def reset(self):
         self.init_info = None
