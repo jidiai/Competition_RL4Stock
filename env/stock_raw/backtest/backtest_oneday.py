@@ -19,7 +19,7 @@ def backtest_oneday(environment, logdir, backtest_mode, TEST_WHITE_CORE_STRATEGY
                     order = Order(side=2, volume=min(
                         1, obs['bv0']), price=obs['bp0'] - 0.1)
                 elif environment.code_net_position < 0:
-                    order = Order(side=1, volume=min(
+                    order = Order(side=0, volume=min(
                         1, obs['av0']), price=obs['ap0'] + 0.1)
                 else:
                     order = Order(side=1, volume=0, price=0)

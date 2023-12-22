@@ -47,7 +47,7 @@ class KaFangStock(Game):
                 code_list.append(float(item))
             df = np.array(df)
             mock_market_data = MockMarketDataCython(df)
-            env = StockBaseEnvCython(date, code_list, mock_market_data)
+            env = StockBaseEnvCython(date, code_list, mock_market_data, limit_of_netpos=300)
 
             self.env_core_list.append(env)
 
@@ -78,7 +78,7 @@ class KaFangStock(Game):
         return [self.get_single_action_space(0)]
 
     def get_single_action_space(self, player_idx):
-        return [Discrete(3), Box(low=0, high=100, shape=(1,)), Box(low=2000, high=10000, shape=(1,))]
+        return [Discrete(3), Box(low=0, high=300, shape=(1,)), Box(low=0, high=100000, shape=(1,))]
 
     def reset(self):
         self.init_info = None
@@ -171,7 +171,10 @@ class KaFangStock(Game):
         # self.all_observes = [obs]
         self.step_cnt += 1
 
-        if done and (self.current_game<self.total_game-1):
+        if done == 2:
+            obs, done, info = self.env_core_list[self.current_game].reset()
+            self.all_observes = [{"observation":obs, "new_game": False}]
+        elif done and (self.current_game<self.total_game-1):
             obs = self.reset_game()
             self.all_observes = obs
         elif done and (self.current_game==self.total_game-1):

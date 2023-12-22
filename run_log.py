@@ -169,7 +169,7 @@ if __name__ == "__main__":
     render_mode = True
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--my_ai", default="random", help="random/rule")
+    parser.add_argument("--my_ai", default="rule", help="random/rule")
     args = parser.parse_args()
 
     # policy_list = ["random"] * len(game.agent_nums)
