@@ -11,6 +11,7 @@ sys.path.append("./olympics_engine")
 from env.chooseenv import make
 from env.utils.get_logger import get_logger
 from env.obs_interfaces.observation import obs_type
+from env.stock_raw.backtest.utils import time_format_conversion
 
 
 class NpEncoder(json.JSONEncoder):
@@ -68,9 +69,17 @@ def get_joint_action_eval(game, multi_part_agent_ids, policy_list, actions_space
         for i in range(len(agents_id_list)):
             agent_id = agents_id_list[i]
             a_obs = all_observes[agent_id]
-            each = eval(function_name)(a_obs, action_space_list[i], game.is_act_continuous)
+            if ((53820 - time_format_conversion(a_obs['observation']['eventTime'])) / 5) < (
+                abs(a_obs['observation']['code_net_position'] - 0) + 1):
+                if a_obs['observation']['code_net_position'] > 0:
+                    each = [[0, 0, 1], [min(1, a_obs['observation']['bv0'])], [a_obs['observation']['bp0'] - 0.1]]
+                elif a_obs['observation']['code_net_position'] < 0:
+                    each = [[1, 0, 0], [min(1, a_obs['observation']['av0'])], [a_obs['observation']['ap0'] + 0.1]]
+                else:
+                    each = [[0, 1, 0], [0], [0]]
+            else:
+                each = eval(function_name)(a_obs, action_space_list[i], game.is_act_continuous)
             joint_action.append(each)
-    # print(joint_action)
     return joint_action
 
 
@@ -122,7 +131,7 @@ def run_game(g, env_name, multi_part_agent_ids, actions_spaces, policy_list, ren
     all_observes = g.all_observes
     while not g.is_terminal():
         step = "step%d" % g.step_cnt
-        if g.step_cnt % 10 == 0:
+        if g.step_cnt % 1000 == 0:
             print(step)
 
         if render_mode and hasattr(g, "env_core"):
