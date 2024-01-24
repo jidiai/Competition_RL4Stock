@@ -25,8 +25,6 @@ def backtest_oneday(environment, logdir, backtest_mode, TEST_WHITE_CORE_STRATEGY
                     order = Order(side=1, volume=0, price=0)
         else:
             order = base_taker_policy(obs, info)
-            # if order.side != 1:
-            #     print(order)
 
         obs, done, info = environment.step(order)
 
